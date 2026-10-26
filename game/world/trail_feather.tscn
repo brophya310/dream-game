@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/world/trail_feather.gd" id="1_feather"]
+[ext_resource type="Shader" path="res://game/fx/blob_shadow.gdshader" id="2_shadow"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 0.55
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feather"]
+albedo_color = Color(1, 0.84, 0.22, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0.2, 1)
+emission_energy_multiplier = 0.35
+
+[sub_resource type="PrismMesh" id="PrismMesh_feather"]
+material = SubResource("StandardMaterial3D_feather")
+size = Vector3(0.14, 0.42, 0.03)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shadow"]
+render_priority = 0
+shader = ExtResource("2_shadow")
+shader_parameter/shadow_color = Color(0.06, 0.03, 0.1, 0.3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_shadow"]
+material = SubResource("ShaderMaterial_shadow")
+size = Vector2(0.3, 0.18)
+
+[node name="TrailFeather" type="Area3D" groups=["trail_feathers"]]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_feather")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_shadow")
+
+[node name="Visual" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(0.866, -0.5, 0, 0.5, 0.866, 0, 0, 0, 1, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("PrismMesh_feather")

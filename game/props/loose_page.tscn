@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/props/gust_prop.gd" id="1_prop"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_page"]
+size = Vector3(0.45, 0.04, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_page"]
+size = Vector3(0.45, 0.04, 0.6)
+
+[node name="LoosePage" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 25
+mass = 0.1
+linear_damp = 2.0
+angular_damp = 3.0
+script = ExtResource("1_prop")
+tint = Color(0.95, 0.92, 0.82, 1)
+gust_response = 1.5
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_page")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_page")

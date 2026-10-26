@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://game/cards/card_data.gd" id="1_card"]
+
+[resource]
+script = ExtResource("1_card")
+id = "light"
+display_name = "Light"
+kind = 1
+rarity = 0
+description = "The owl glows, lighting the area around him until the next reshuffle."

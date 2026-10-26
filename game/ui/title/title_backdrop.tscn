@@ -1,0 +1,114 @@
+[gd_scene format=3]
+
+[ext_resource type="Environment" path="res://game/world/library_environment.tres" id="1_env"]
+[ext_resource type="Material" path="res://game/world/library_floor_material.tres" id="2_floor"]
+[ext_resource type="Script" path="res://game/world/kit/book_cliff.gd" id="3_cliff"]
+[ext_resource type="Script" path="res://game/world/kit/shelf.gd" id="4_shelf"]
+[ext_resource type="Script" path="res://game/world/kit/lectern.gd" id="5_lectern"]
+[ext_resource type="Script" path="res://game/world/kit/rug.gd" id="6_rug"]
+[ext_resource type="Script" path="res://game/world/kit/floor_lamp.gd" id="7_lamp"]
+[ext_resource type="Script" path="res://game/world/kit/pillar.gd" id="8_pillar"]
+[ext_resource type="Script" path="res://game/world/kit/reading_table.gd" id="9_table"]
+[ext_resource type="Script" path="res://game/world/kit/book_pile.gd" id="10_pile"]
+[ext_resource type="Script" path="res://game/world/grass_patch.gd" id="11_grass"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/owl/owl_frames.tres" id="12_owl"]
+[ext_resource type="PackedScene" path="res://game/fx/dream_motes.tscn" id="13_motes"]
+[ext_resource type="Script" path="res://game/camera/follow_camera.gd" id="14_camera"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+material = ExtResource("2_floor")
+size = Vector2(40, 30)
+
+[node name="TitleBackdrop" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_env")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.81915206, 0.45198435, -0.3531289, 0, 0.6156615, 0.7880107, 0.5735764, 0.6455006, -0.5043204, 0, 12, 0)
+light_color = Color(1, 0.93, 0.82, 1)
+light_energy = 0.7
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_floor")
+
+[node name="BackCliff" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
+script = ExtResource("3_cliff")
+size = Vector3(26, 3.5, 2)
+
+[node name="ShelfLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, -3.5)
+script = ExtResource("4_shelf")
+size = Vector3(6, 2.25, 1)
+
+[node name="ShelfRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -3.5)
+script = ExtResource("4_shelf")
+size = Vector3(6, 2.25, 1)
+
+[node name="PillarLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, -4.5)
+script = ExtResource("8_pillar")
+
+[node name="PillarRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -4.5)
+script = ExtResource("8_pillar")
+
+[node name="Rug" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+script = ExtResource("6_rug")
+size = Vector2(4.5, 3)
+
+[node name="Lectern" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4)
+script = ExtResource("5_lectern")
+
+[node name="LampLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, -1.8)
+script = ExtResource("7_lamp")
+
+[node name="LampRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, -1.8)
+script = ExtResource("7_lamp")
+
+[node name="Table" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 1.2)
+script = ExtResource("9_table")
+
+[node name="Pile" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+script = ExtResource("10_pile")
+count = 6
+
+[node name="Grass" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+script = ExtResource("11_grass")
+extent = Vector2(22, 6)
+count = 160
+random_seed = 7
+
+[node name="Owl" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.5)
+cast_shadow = 0
+offset = Vector2(0, 17)
+pixel_size = 0.03125
+billboard = 1
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("12_owl")
+animation = &"idle_south"
+
+[node name="Motes" parent="." instance=ExtResource("13_motes")]
+
+[node name="CameraFocus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+projection = 1
+size = 11.25
+far = 100.0
+script = ExtResource("14_camera")
+target = NodePath("../CameraFocus")
+follow_speed = 2.0

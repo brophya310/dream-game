@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/player/owl.gd" id="1_owl"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/owl/owl_frames.tres" id="2_frames"]
+[ext_resource type="PackedScene" path="res://game/fx/gust_puff.tscn" id="3_puff"]
+[ext_resource type="Shader" path="res://game/fx/blob_shadow.gdshader" id="4_shadow"]
+[ext_resource type="Script" path="res://game/fx/footprint_trail.gd" id="5_trail"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.3
+height = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shadow"]
+render_priority = 0
+shader = ExtResource("4_shadow")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_shadow"]
+material = SubResource("ShaderMaterial_shadow")
+size = Vector2(0.75, 0.45)
+
+[node name="Owl" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_owl")
+gust_puff_scene = ExtResource("3_puff")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_shadow")
+
+[node name="Footprints" type="MultiMeshInstance3D" parent="."]
+script = ExtResource("5_trail")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+cast_shadow = 0
+pixel_size = 0.03125
+billboard = 1
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("2_frames")
+animation = &"idle_south"

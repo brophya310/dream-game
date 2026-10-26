@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://chy38i2sx38kg"]
+
+[ext_resource type="Script" uid="uid://cqiys3uhu5cjj" path="res://game/ui/title/title_screen.gd" id="1_title"]
+[ext_resource type="PackedScene" path="res://game/ui/title/title_backdrop.tscn" id="2_backdrop"]
+[ext_resource type="PackedScene" path="res://game/fx/tilt_shift.tscn" id="3_tilt"]
+[ext_resource type="Script" uid="uid://b8cecbquqm61b" path="res://game/ui/menu_list.gd" id="4_menu"]
+[ext_resource type="Script" uid="uid://ufl6eyxdgvgd" path="res://game/ui/slots/slot_select.gd" id="5_slots"]
+[ext_resource type="Script" uid="uid://cmba24bm3d1sd" path="res://game/ui/options/options_menu.gd" id="6_options"]
+
+[node name="TitleScreen" type="Node3D" unique_id=150182735]
+script = ExtResource("1_title")
+
+[node name="Backdrop" parent="." unique_id=677988403 instance=ExtResource("2_backdrop")]
+
+[node name="TiltShift" parent="." unique_id=575617944 instance=ExtResource("3_tilt")]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=150253955]
+layer = 5
+
+[node name="TitleBlock" type="VBoxContainer" parent="UI" unique_id=1353068561]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="UI/TitleBlock" unique_id=1357232873]
+layout_mode = 2
+theme_type_variation = &"LightLabel"
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+text = "Dream Game"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UI/TitleBlock" unique_id=560459635]
+layout_mode = 2
+theme_type_variation = &"LightLabel"
+theme_override_font_sizes/font_size = 10
+text = "(working title)"
+horizontal_alignment = 1
+
+[node name="PressStart" type="Label" parent="UI" unique_id=1932664474]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"LightLabel"
+theme_override_font_sizes/font_size = 14
+text = "Press Enter"
+horizontal_alignment = 1
+
+[node name="Center" type="CenterContainer" parent="UI" unique_id=1696325326]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainPanel" type="PanelContainer" parent="UI/Center" unique_id=2038423750]
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="UI/Center/MainPanel" unique_id=1962291282]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+script = ExtResource("4_menu")
+
+[node name="SlotSelect" type="PanelContainer" parent="UI/Center" unique_id=1795631465]
+layout_mode = 2
+script = ExtResource("5_slots")
+
+[node name="Options" type="PanelContainer" parent="UI/Center" unique_id=369395635]
+layout_mode = 2
+script = ExtResource("6_options")
+
+[node name="Studio" type="Label" parent="UI" unique_id=1051290334]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -22.0
+offset_right = -10.0
+offset_bottom = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"LightLabel"
+theme_override_font_sizes/font_size = 10
+text = "Mallard Industries"
+horizontal_alignment = 2
+
+[node name="Build" type="Label" parent="UI" unique_id=721098459]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -22.0
+offset_right = 160.0
+offset_bottom = -6.0
+grow_vertical = 0
+theme_type_variation = &"LightLabel"
+theme_override_font_sizes/font_size = 10
+text = "test build"

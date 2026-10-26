@@ -1,0 +1,6 @@
+# Normalize line endings for all text files.
+* text=auto eol=lf
+
+# Art and documents are binary.
+*.png binary
+*.pdf binary
